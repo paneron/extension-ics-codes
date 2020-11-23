@@ -82,7 +82,7 @@ const code: ItemClassConfiguration<CodeData> = {
                   getRelatedItemClassConfiguration={getRelatedItemClassConfiguration}
                   itemRef={{ classID: 'codes', itemID: r.to }}
                 />
-                {r.text ? <p css={css`margin-top: .25rem;`}>{r.text}</p> : null}
+                {r.text ? <p css={css`font-size: 80%; margin-top: .25rem;`}>{r.text}</p> : null}
               </div>
             )}
           </PropertyDetailView>
