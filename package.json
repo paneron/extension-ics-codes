@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha8",
   "description": "Paneron extension for working with IEC ICS code registry",
   "main": "plugin.js",
-  "repository": "https://github.com/riboseinc/paneron-extension-ics-codes",
+  "repository": "https://github.com/paneron/paneron-extension-ics-codes",
   "author": "Ribose Inc. <open.source@ribose.com>",
   "paneronExtension": {
     "title": "ICS Codes Registry",
