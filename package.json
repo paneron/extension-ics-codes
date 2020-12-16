@@ -7,7 +7,7 @@
   "author": "Ribose Inc. <open.source@ribose.com>",
   "paneronExtension": {
     "title": "ICS Codes Registry",
-    "iconURL": "https://isotc211.geolexica.org/assets/logo-iso-noninverted.svg",
+    "iconURL": "https://extensions.paneron.org/iso-iec.png",
     "featured": true,
     "requiredHostAppVersion": "^1.0.0-alpha19"
   },
