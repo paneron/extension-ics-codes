@@ -4,7 +4,8 @@ import { css, jsx } from '@emotion/core';
 
 import { GenericRelatedItemView, PropertyDetailView } from '@riboseinc/paneron-registry-kit/views/util';
 import { ItemClassConfiguration } from '@riboseinc/paneron-registry-kit/types/views';
-import { ControlGroup, InputGroup, Tag } from '@blueprintjs/core';
+import { Button, ButtonGroup, ControlGroup, InputGroup, Tag, TextArea } from '@blueprintjs/core';
+import React from 'react';
 
 
 export function openLinkInBrowser(link: string) {
@@ -39,7 +40,7 @@ interface CodeData {
   description: string
   descriptionFull: string
   relationships: { type: 'related', to: string /* UUID */, text?: string }[]
-  notes?: string[]
+  notes: string[]
 }
 
 
@@ -53,6 +54,8 @@ const code: ItemClassConfiguration<CodeData> = {
   defaults: {
     description: '',
     descriptionFull: '',
+    relationships: [],
+    notes: [],
   },
   itemSorter: (p1, p2) => (p1.code || '').localeCompare(p2.code || ''),
   sanitizePayload: async (p) => p,
@@ -114,7 +117,94 @@ const code: ItemClassConfiguration<CodeData> = {
         </div>
       );
     },
-    editView: () => <span>TBD</span>,
+    editView: ({ itemData, className, useRegisterItemData, getRelatedItemClassConfiguration, onChange }) => {
+      const {
+        fieldcode, groupcode, subgroupcode,
+        context,
+        description, descriptionFull,
+        relationships, notes,
+      } = itemData;
+
+      function handleItemAddition<T extends 'notes' | 'relationships'>(field: T, makeNewItem: () => CodeData[T][number]) {
+        return () => {
+          if (!onChange) { return; }
+          const items: CodeData[T] = (Array.isArray(itemData[field]) ? itemData[field] : []);
+          onChange({ ...itemData, [field]: [...items, makeNewItem()] });
+        };
+      }
+
+      function handleItemDeletion<T extends 'notes' | 'relationships'>(field: T) {
+        return (idx: number) => {
+          if (!onChange) { return; }
+          var items: CodeData[T] = [...(itemData[field] ?? [])] as CodeData[T];
+          items.splice(idx, 1);
+          onChange({ ...itemData, [field]: items });
+        };
+      }
+
+      const handleNoteAddition = handleItemAddition('notes', () => '');
+      const handleNoteDeletion = handleItemDeletion('notes'); 
+
+      function handleNoteChange(idx: number, note: string) {
+        if (!onChange) { return; }
+        const newNotes = [ ...notes ];
+        newNotes[idx] = note;
+        onChange({ ...itemData, notes: newNotes });
+      }
+
+      return (
+        <div className={className}>
+          <ButtonGroup css={css`margin-bottom: 1rem`}>
+            <Button onClick={handleNoteAddition} icon="add">Note</Button>
+          </ButtonGroup>
+
+          <PropertyDetailView title="Code">
+            <ControlGroup fill>
+              <InputGroup readOnly={!onChange} onChange={(evt: React.FormEvent<HTMLInputElement>) => onChange!({ ...itemData, fieldcode: evt.currentTarget.value })} leftIcon={<Tag minimal>Field</Tag>} value={fieldcode ?? ''} />
+              <InputGroup readOnly={!onChange} onChange={(evt: React.FormEvent<HTMLInputElement>) => onChange!({ ...itemData, groupcode: evt.currentTarget.value })} leftIcon={<Tag minimal>Group</Tag>} value={groupcode ?? ''} />
+              <InputGroup readOnly={!onChange} onChange={(evt: React.FormEvent<HTMLInputElement>) => onChange!({ ...itemData, subgroupcode: evt.currentTarget.value })} leftIcon={<Tag minimal>Subgroup</Tag>} value={subgroupcode ?? ''} />
+            </ControlGroup>
+          </PropertyDetailView>
+          <PropertyDetailView title="Context">
+            {context
+              ? <a onClick={() => openLinkInBrowser(context)}>{context}</a>
+              : '—'}
+          </PropertyDetailView>
+          <PropertyDetailView title="Description">
+            <TextArea value={description} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, description: evt.currentTarget.value })} />
+          </PropertyDetailView>
+          <PropertyDetailView title="Full description">
+            <TextArea value={descriptionFull} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, descriptionFull: evt.currentTarget.value })} />
+          </PropertyDetailView>
+
+          <PropertyDetailView title="Relationships">
+            {(relationships ?? []).map(r =>
+              <div>
+                <GenericRelatedItemView
+                  useRegisterItemData={useRegisterItemData}
+                  getRelatedItemClassConfiguration={getRelatedItemClassConfiguration}
+                  itemRef={{ classID: 'codes', itemID: r.to }}
+                />
+                {r.text ? <p css={css`font-size: 80%; margin-top: .25rem;`}>{r.text}</p> : null}
+              </div>
+            )}
+          </PropertyDetailView>
+
+          {(notes ?? []).map((n, idx) =>
+            <PropertyDetailView
+                key={idx}
+                title={`Note ${idx + 1}`}
+                secondaryTitle={<Button icon="cross" onClick={() => handleNoteDeletion(idx)}>Delete note</Button>}>
+              <TextArea
+                value={n}
+                disabled={!onChange}
+                onChange={(evt) => handleNoteChange(idx, evt.currentTarget.value)}
+              />
+            </PropertyDetailView>
+          )}
+        </div>
+      );
+    },
   },
 };
 
