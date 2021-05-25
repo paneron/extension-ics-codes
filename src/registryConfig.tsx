@@ -76,7 +76,7 @@ const code: ItemClassConfiguration<CodeData> = {
         relationships, notes,
       } = itemData;
       return (
-        <div className={className}>
+        <div css={css`padding: 1rem;`} className={className}>
           <PropertyDetailView title="Code">
             <ControlGroup fill>
               <InputGroup readOnly leftIcon={<Tag minimal>Field</Tag>} value={fieldcode} />
@@ -153,7 +153,7 @@ const code: ItemClassConfiguration<CodeData> = {
       }
 
       return (
-        <div className={className}>
+        <div css={css`padding: 1rem;`} className={className}>
           <ButtonGroup css={css`margin-bottom: 1rem`}>
             <Button onClick={handleNoteAddition} icon="add">Note</Button>
           </ButtonGroup>
