@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import { css, jsx } from '@emotion/core';
+import styled from '@emotion/styled';
 
 import { GenericRelatedItemView, PropertyDetailView } from '@riboseinc/paneron-registry-kit/views/util';
 import { ItemClassConfiguration } from '@riboseinc/paneron-registry-kit/types/views';
@@ -76,7 +77,7 @@ const code: ItemClassConfiguration<CodeData> = {
         relationships, notes,
       } = itemData;
       return (
-        <div css={css`padding: 1rem;`} className={className}>
+        <Wrapper className={className}>
           <PropertyDetailView title="Code">
             <ControlGroup fill>
               <InputGroup readOnly leftIcon={<Tag minimal>Field</Tag>} value={fieldcode} />
@@ -114,7 +115,7 @@ const code: ItemClassConfiguration<CodeData> = {
               </div>
             )}
           </PropertyDetailView>
-        </div>
+        </Wrapper>
       );
     },
     editView: ({ itemData, className, useRegisterItemData, getRelatedItemClassConfiguration, onChange }) => {
@@ -153,7 +154,7 @@ const code: ItemClassConfiguration<CodeData> = {
       }
 
       return (
-        <div css={css`padding: 1rem;`} className={className}>
+        <Wrapper className={className}>
           <ButtonGroup css={css`margin-bottom: 1rem`}>
             <Button onClick={handleNoteAddition} icon="add">Note</Button>
           </ButtonGroup>
@@ -171,10 +172,10 @@ const code: ItemClassConfiguration<CodeData> = {
               : '—'}
           </PropertyDetailView>
           <PropertyDetailView title="Description">
-            <TextArea value={description} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, description: evt.currentTarget.value })} />
+            <TextArea fill value={description} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, description: evt.currentTarget.value })} />
           </PropertyDetailView>
           <PropertyDetailView title="Full description">
-            <TextArea value={descriptionFull} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, descriptionFull: evt.currentTarget.value })} />
+            <TextArea fill value={descriptionFull} disabled={!onChange} onChange={(evt) => onChange!({ ...itemData, descriptionFull: evt.currentTarget.value })} />
           </PropertyDetailView>
 
           <PropertyDetailView title="Relationships">
@@ -197,12 +198,13 @@ const code: ItemClassConfiguration<CodeData> = {
                 secondaryTitle={<Button icon="cross" onClick={() => handleNoteDeletion(idx)}>Delete note</Button>}>
               <TextArea
                 value={n}
+                fill
                 disabled={!onChange}
                 onChange={(evt) => handleNoteChange(idx, evt.currentTarget.value)}
               />
             </PropertyDetailView>
           )}
-        </div>
+        </Wrapper>
       );
     },
   },
@@ -212,3 +214,10 @@ const code: ItemClassConfiguration<CodeData> = {
 export const itemClassConfiguration = {
   codes: code,
 };
+
+
+const Wrapper = styled.div`
+  position: absolute; top: 0rem; left: 0rem; right: 0rem; bottom: 0rem;
+  overflow-y: auto;
+  padding: 1rem;
+`;
