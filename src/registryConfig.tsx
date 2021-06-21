@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { GenericRelatedItemView, PropertyDetailView } from '@riboseinc/paneron-registry-kit/views/util';
