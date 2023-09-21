@@ -1,12 +1,13 @@
 /** @jsx jsx */
 
+import React from 'react';
+
 import { css, jsx } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { GenericRelatedItemView, PropertyDetailView } from '@riboseinc/paneron-registry-kit/views/util';
 import type { ItemClassConfiguration } from '@riboseinc/paneron-registry-kit/types/views';
 import { Button, ButtonGroup, ControlGroup, InputGroup, Tag, TextArea } from '@blueprintjs/core';
-import React from 'react';
 
 
 export function openLinkInBrowser(link: string) {
