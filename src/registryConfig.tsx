@@ -63,12 +63,13 @@ const code: ItemClassConfiguration<CodeData> = {
   validatePayload: async () => true,
 
   views: {
-    listItemView: ({ itemData, className }) =>
+    listItemView: React.memo(({ itemData, className }) =>
       <span className={className}>
         <code>{itemData.code}</code>
         &emsp;
         {itemData.description}
-      </span>,
+      </span>
+    ),
     detailView: ({ itemData, className, useRegisterItemData, getRelatedItemClassConfiguration }) => {
       const {
         fieldcode, groupcode, subgroupcode,
