@@ -1062,15 +1062,15 @@
   dependencies:
     chokidar "2.1.8"
 
-"@riboseinc/paneron-extension-kit@2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-extension-kit/-/paneron-extension-kit-2.0.7.tgz#ec0d9a9e103fff001d8cf920fb89d1b924a26d42"
-  integrity sha512-q1aSeaN+lA72TiARINQRS2ugjMsbwx3Shf227ZuW46ShJ/I0ZkPvsUgIw5L17/JgVzpCzvT/q7NhL50VEPzpYQ==
+"@riboseinc/paneron-extension-kit@2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-extension-kit/-/paneron-extension-kit-2.2.5.tgz#acab154c6c7cb27385e30c72b336a15c31eaad35"
+  integrity sha512-zMGQjlrwL1XdOGFMDDkWIsQ48AEkltl2xxi9kkavt4pfA7yMhaBQuUZoLj2LUpgH9V51s1zeMlagrmvgvYu2Hw==
 
-"@riboseinc/paneron-registry-kit@2.0.10":
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-registry-kit/-/paneron-registry-kit-2.0.10.tgz#ab807970afc8b8f36b155431e31bdc48d20a7316"
-  integrity sha512-S2fs900dyiPfGSFuZ/xut8qjtUYmCAiTM3gCGf6IpJhq0DI1VWboh0L2B9dL33Rz395lR2c51tDjY9JoiXPDBw==
+"@riboseinc/paneron-registry-kit@2.2.7":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-registry-kit/-/paneron-registry-kit-2.2.7.tgz#b379d88965996dd7e0efa02ab74f076b59dbed77"
+  integrity sha512-nSGo1C0mn9u/gDYg6KK5GUwA0BRJwGu7ClIM7/lLNc811jmSzyPzt/ZgW2DlNuMhm4At30uiEk7sQkCyK0ASsQ==
 
 "@types/dom4@^2.0.2":
   version "2.0.2"
