@@ -1,9 +1,8 @@
-import { makeExtension } from '@riboseinc/paneron-extension-kit';
+import { makeRegistryExtension } from '@riboseinc/paneron-registry-kit';
+import { itemClassConfiguration } from './registryConfig';
 
-export default makeExtension({
-  mainView: () => import('./RepoView'),
+
+export default makeRegistryExtension({
   name: "ICS Codes Registry",
-  requiredHostAppVersion: "^2.0.0",
-  datasetMigrations: {},
-  datasetInitializer: () => import('./migrations/initial'),
+  itemClassConfiguration,
 });
